@@ -1,15 +1,12 @@
 <template>
   <div id="app">
-    <!-- <el-row> -->
-    <el-button type="danger">危险按钮</el-button>
-    <!-- </el-row> -->
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'app',
-  components: {}
+  name: 'app'
 }
 </script>
 
