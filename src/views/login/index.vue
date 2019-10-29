@@ -65,11 +65,15 @@ export default {
             mobile: this.loginForm.phoneNum,
             code: this.loginForm.code
           }
-          let {
-            data: { data }
-          } = await this.$http.post('/authorizations', userPass)
-          localUser.setUser(data)
-          this.$router.push('/')
+          try {
+            let {
+              data: { data }
+            } = await this.$http.post('/authorizations', userPass)
+            localUser.setUser(data)
+            this.$router.push('/')
+          } catch (e) {
+            this.$message.error('手机号或验证码错误！')
+          }
         }
       })
       // console.log(this.$refs[loginForm])

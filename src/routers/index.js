@@ -6,6 +6,7 @@ import localUser from '@/utils/localuser'
 import loginPage from '@/views/login/index.vue'
 import homeIndex from '@/views/home'
 import welcomeIndex from '@/views/welcome'
+import article from '@/views/article'
 
 import error from '@/views/404'
 
@@ -24,6 +25,10 @@ let router = new VueRouter({
         {
           path: '/',
           component: welcomeIndex
+        },
+        {
+          path: '/article',
+          component: article
         }
       ]
     },

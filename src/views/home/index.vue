@@ -5,7 +5,7 @@
         <el-col style="height:100%;">
           <el-menu
             style="border:0 none;"
-            default-active="/"
+            :default-active="$route.path"
             class="el-menu-vertical-demo"
             background-color="#002033"
             text-color="#fff"
