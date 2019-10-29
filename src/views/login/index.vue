@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import localUser from './../../utils/localuser.js'
 export default {
   data () {
     const phoneNumCheck = function (rule, value, callback) {
@@ -41,8 +42,8 @@ export default {
     }
     return {
       loginForm: {
-        phoneNum: '',
-        code: ''
+        phoneNum: '13233334444',
+        code: '246810'
       },
       rules: {
         phoneNum: [
@@ -69,6 +70,9 @@ export default {
             })
             .then(res => {
               if (res.status === 201) {
+                // console.log(res)
+                // 用户登录时设置一个token
+                localUser.setUser(res.data.data)
                 this.$router.push('/')
               }
             })
@@ -88,7 +92,7 @@ export default {
   width: 100%;
   height: 100%;
   /* background-color: #fcc; */
-  background: url("../../assets/images/login_bg.jpg") no-repeat center/cover;
+  background: url('../../assets/images/login_bg.jpg') no-repeat center/cover;
   position: absolute;
   left: 0;
   top: 0;
@@ -102,7 +106,7 @@ export default {
     background-color: #fff;
     img {
       display: block;
-      width: 250;
+      width: 250px;
       margin: 0 auto 30px;
     }
   }
