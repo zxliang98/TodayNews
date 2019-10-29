@@ -54,15 +54,15 @@
             :class="[{'el-icon-s-fold':!isCollapse},{'el-icon-s-unfold':isCollapse}]"
           ></span>
           <span class="head">江苏传智播客科技教育有限公司</span>
-          <el-dropdown class="icon_log">
+          <el-dropdown class="icon_log" @command="dropdowmClivk">
             <span class="el-dropdown-link">
-              <img class="user_icon" src="./../../assets/images/avatar.jpg" alt />
-              用户名
+              <img class="user_icon" :src="userInfo.photo" alt />
+              {{userInfo.name}}
               <i class="el-icon-arrow-down el-icon--right"></i>
             </span>
             <el-dropdown-menu class slot="dropdown">
-              <el-dropdown-item icon="el-icon-setting">个人设置</el-dropdown-item>
-              <el-dropdown-item icon="el-icon-unlock">退出登录</el-dropdown-item>
+              <el-dropdown-item command="setting" icon="el-icon-setting">个人设置</el-dropdown-item>
+              <el-dropdown-item command="logout" icon="el-icon-unlock">退出登录</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </el-header>
@@ -75,16 +75,36 @@
 </template>
 
 <script>
+import localUser from './../../utils/localuser'
 export default {
   data () {
     return {
-      isCollapse: false
+      isCollapse: false,
+      userInfo: {
+        name: '',
+        photo: ''
+      }
     }
   },
   methods: {
     collapse () {
       this.isCollapse = !this.isCollapse
+    },
+    dropdowmClivk (command) {
+      switch (command) {
+        case 'setting':
+          this.$router.push('/setting')
+          break
+        case 'logout':
+          localUser.remUser()
+          this.$router.push('/login')
+          break
+      }
     }
+  },
+  created () {
+    let user = localUser.getUser() || {}
+    this.userInfo = user
   }
 }
 </script>
@@ -101,11 +121,11 @@ export default {
     background-color: #002033;
     .logoIndex {
       height: 60px;
-      background: #002244 url("./../../assets/images/logo_admin.png") no-repeat
+      background: #002244 url('./../../assets/images/logo_admin.png') no-repeat
         center / 140px auto;
     }
     .collapseLogo {
-      background: #002244 url("./../../assets/images/logo_admin_01.png")
+      background: #002244 url('./../../assets/images/logo_admin_01.png')
         no-repeat center / 40px auto;
     }
   }

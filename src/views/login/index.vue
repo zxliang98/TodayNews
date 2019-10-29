@@ -59,29 +59,40 @@ export default {
   },
   methods: {
     login (loginForm) {
-      // console.log(this.$refs[loginForm])
-
-      this.$refs[loginForm].validate(valid => {
+      this.$refs[loginForm].validate(async valid => {
         if (valid) {
-          this.$http
-            .post('/authorizations', {
-              mobile: this.loginForm.phoneNum,
-              code: this.loginForm.code
-            })
-            .then(res => {
-              if (res.status === 201) {
-                // console.log(res)
-                // 用户登录时设置一个token
-                localUser.setUser(res.data.data)
-                this.$router.push('/')
-              }
-            })
-        } else {
-          console.log('error submit!!')
-          this.$message.error('手机号或验证码错误！')
-          return false
+          let userPass = {
+            mobile: this.loginForm.phoneNum,
+            code: this.loginForm.code
+          }
+          let {
+            data: { data }
+          } = await this.$http.post('/authorizations', userPass)
+          localUser.setUser(data)
+          this.$router.push('/')
         }
       })
+      // console.log(this.$refs[loginForm])
+      // this.$refs[loginForm].validate(valid => {
+      //   if (valid) {
+      //     this.$http
+      //       .post('/authorizations', {
+      //         mobile: this.loginForm.phoneNum,
+      //         code: this.loginForm.code
+      //       })
+      //       .then(res => {
+      //         if (res.status === 201) {
+      //           // console.log(res)
+      //           // 用户登录时设置一个token
+      //           localUser.setUser(res.data.data)
+      //           this.$router.push('/')
+      //         }
+      //       })
+      //       .catch(() => {
+      //         this.$message.error('手机号或验证码错误！')
+      //       })
+      //   }
+      // })
     }
   }
 }
