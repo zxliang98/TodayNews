@@ -16,19 +16,7 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item label="频道">
-          <el-select
-            v-model="searchInfo.channel_id"
-            placeholder="请选择"
-            clearable
-            @clear="selectChannel"
-          >
-            <el-option
-              v-for="item in channelOptions"
-              :key="item.id"
-              :label="item.name"
-              :value="item.id"
-            ></el-option>
-          </el-select>
+          <get-channels v-model="searchInfo.channel_id"></get-channels>
         </el-form-item>
         <el-form-item label="日期">
           <el-date-picker
@@ -128,6 +116,7 @@ export default {
     }
   },
   methods: {
+    // 获取文章
     async getArticles () {
       const {
         data: { data }
@@ -136,12 +125,7 @@ export default {
       this.total_count = data.total_count
       // this.per_page = data.per_page
     },
-    async getChannels () {
-      const {
-        data: { data }
-      } = await this.$http.get('/channels')
-      this.channelOptions = data.channels
-    },
+    // 处理选择的日期
     selectDate () {
       // ;[
       //   this.searchInfo.begin_pubdate,
@@ -156,22 +140,21 @@ export default {
       }
       // console.log(this.pubDate)
     },
-    selectChannel () {
-      // if (this.searchInfo.channel_id === '') {
-      this.searchInfo.channel_id = null
-      // }
-    },
+    // 点击筛选文章
     searchArticle () {
       this.searchInfo.page = 1
       this.getArticles()
     },
+    // 改变分页
     selectPage (currentPage) {
       this.searchInfo.page = currentPage
       this.getArticles()
     },
+    // 点击去编辑
     toEdit (id) {
       this.$router.push({ path: '/publish', query: { id } })
     },
+    // 删除文章
     delArticle (id) {
       this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
         confirmButtonText: '确定',
@@ -194,9 +177,9 @@ export default {
         })
     }
   },
+  // 初始化
   created () {
     this.getArticles()
-    this.getChannels()
   }
 }
 </script>
