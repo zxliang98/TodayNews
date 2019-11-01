@@ -3,9 +3,21 @@ import axios from 'axios'
 import localUser from '@/utils/localuser'
 import router from '@/routers'
 
+import JSONBIG from 'json-bigint'
+
 // 对axios进行配置
 // baseURL  作用：设置基准地址（前面一段相同的地址）
 axios.defaults.baseURL = 'http://ttapi.research.itcast.cn/mp/v1_0'
+
+// transformResponse 对 data 进行任意转换处理
+axios.defaults.transformResponse = [(data) => {
+  // 对 data 进行任意转换处理
+  try {
+    return JSONBIG.parse(data)
+  } catch (e) {
+    return data
+  }
+}]
 
 // 设置请求拦截器和响应拦截器
 
