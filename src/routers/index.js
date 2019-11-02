@@ -7,6 +7,7 @@ import loginPage from '@/views/login/index.vue'
 import homeIndex from '@/views/home'
 import welcomeIndex from '@/views/welcome'
 import article from '@/views/article'
+import images from '@/views/images'
 
 import error from '@/views/404'
 
@@ -29,6 +30,10 @@ let router = new VueRouter({
         {
           path: '/article',
           component: article
+        },
+        {
+          path: '/images',
+          component: images
         }
       ]
     },
