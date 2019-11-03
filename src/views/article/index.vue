@@ -34,7 +34,7 @@
         </el-form-item>
       </el-form>
     </el-card>
-    <el-card>
+    <el-card class="center">
       <div slot="header">根据筛选条件共查询到 {{total_count}} 条结果：</div>
       <el-table :data="articles" stripe style="width: 100%">
         <el-table-column label="封面" width="170px">
@@ -184,5 +184,8 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less" scoped>
+.center {
+  margin-top: 20px;
+}
 </style>
