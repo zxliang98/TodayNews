@@ -8,6 +8,7 @@ import homeIndex from '@/views/home'
 import welcomeIndex from '@/views/welcome'
 import article from '@/views/article'
 import images from '@/views/images'
+import publish from '@/views/publish'
 
 import error from '@/views/404'
 
@@ -34,6 +35,10 @@ let router = new VueRouter({
         {
           path: '/images',
           component: images
+        },
+        {
+          path: '/publish',
+          component: publish
         }
       ]
     },
