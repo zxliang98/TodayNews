@@ -10,6 +10,7 @@ import article from '@/views/article'
 import images from '@/views/images'
 import publish from '@/views/publish'
 import comment from '../views/comment'
+import setting from '../views/setting'
 
 import error from '@/views/404'
 
@@ -44,6 +45,10 @@ let router = new VueRouter({
         {
           path: '/comment',
           component: comment
+        },
+        {
+          path: '/setting',
+          component: setting
         }
       ]
     },
