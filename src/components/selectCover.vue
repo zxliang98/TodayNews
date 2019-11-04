@@ -1,7 +1,7 @@
 <template>
-  <div class="selectCover" :value="value">
+  <div class="selectCover">
     <div @click="open" class="default">
-      <img :src="defaultImage" alt />
+      <img :src="value||defaultImage" alt />
     </div>
     <el-dialog title="提示" :visible.sync="centerDialogVisible" width="900px" center>
       <el-tabs v-model="selectMethod" type="card">
@@ -117,22 +117,15 @@ export default {
         if (!this.selectUrl) {
           return this.$message.warning('请选择一张图片！')
         }
-        this.defaultImage = this.selectUrl
-        this.centerDialogVisible = false
         this.$emit('input', this.selectUrl)
+        this.centerDialogVisible = false
       } else {
         if (!this.uploadUrl) {
           return this.$message.warning('请上传一张图片！')
         }
-        this.defaultImage = this.uploadUrl
-        this.centerDialogVisible = false
         this.$emit('input', this.uploadUrl)
+        this.centerDialogVisible = false
       }
-    }
-  },
-  created () {
-    if (this.value) {
-      this.defaultImage = this.value
     }
   }
 }
