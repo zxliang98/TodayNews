@@ -76,6 +76,7 @@
 
 <script>
 import localUser from './../../utils/localuser'
+import eventBus from './../../utils/eventBus'
 export default {
   data () {
     return {
@@ -105,6 +106,13 @@ export default {
   created () {
     let user = localUser.getUser() || {}
     this.userInfo = user
+
+    eventBus.$on('giveName', data => {
+      this.userInfo.name = data
+    })
+    eventBus.$on('givePhoto', data => {
+      this.userInfo.photo = data
+    })
   }
 }
 </script>
