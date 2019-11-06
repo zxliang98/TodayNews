@@ -11,6 +11,7 @@ import images from '@/views/images'
 import publish from '@/views/publish'
 import comment from '../views/comment'
 import setting from '../views/setting'
+import fans from '../views/fans'
 
 import error from '@/views/404'
 
@@ -49,6 +50,10 @@ let router = new VueRouter({
         {
           path: '/setting',
           component: setting
+        },
+        {
+          path: '/fans',
+          component: fans
         }
       ]
     },
